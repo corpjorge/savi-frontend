@@ -3,8 +3,8 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      sans: ["Roboto", "sans-serif"],
-      heading: ["Roboto", "sans-serif"],
+      sans: ["Inter", "sans-serif"],
+      heading: ["Inter", "sans-serif"],
     },
     colors: {
       green: {
