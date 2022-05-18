@@ -1,5 +1,15 @@
 <script setup lang="ts">
 import LayoutDefault from "@/components/Layouts/LayoutDefault.vue";
+import SButton from "@/components/SaviUI/S-Button.vue";
+import SInput from "@/components/SaviUI/Forms/S-Input.vue";
+import SCheckbox from "@/components/SaviUI/Forms/S-Checkbox.vue";
+import { reactive } from "vue";
+
+const state = reactive({
+  email: "",
+  password: "",
+  TermsAndConditions: false,
+});
 </script>
 <template>
   <LayoutDefault>
@@ -19,19 +29,21 @@ import LayoutDefault from "@/components/Layouts/LayoutDefault.vue";
               <label class="text-gray-600 text-sm font-semibold" for="email">
                 Correo electrónico
               </label>
-              <input
-                class="border border-gray-300 rounded-lg | w-full py-2 px-3 mt-2 | text-gray-700 | focus:outline-none focus:border-green-900"
+              <SInput
+                type="email"
+                name="email"
                 id="email"
-                type="text"
-                placeholder="micorreo@correo.com"
+                placeholder="Ingresa tu correo electrónico"
+                v-model="state.email"
               />
             </div>
+            {{ state.email }}
             <div class="mb-3">
               <label class="text-gray-600 text-sm font-semibold" for="password">
                 Password
               </label>
-              <input
-                class="border border-gray-300 rounded-lg | w-full py-2 px-3 mt-2 | text-gray-700 | focus:outline-none focus:border-green-900"
+              <SInput
+                name="password"
                 id="password"
                 type="password"
                 placeholder="******************"
@@ -39,35 +51,36 @@ import LayoutDefault from "@/components/Layouts/LayoutDefault.vue";
             </div>
             <div class="mb-3">
               <div>
-                <input
-                  class="accent-green-900 ml-2"
-                  type="checkbox"
-                  id="vehicle1"
-                  name="vehicle1"
-                  value="Bike"
+                <SCheckbox
+                  v-model="state.TermsAndConditions"
+                  name="TermsAndConditions"
+                  id="TermsAndConditions"
                 />
-                <label class="text-red-500 text-xs italic" for="vehicle1">
+                <label
+                  class="text-red-500 text-xs italic"
+                  for="TermsAndConditions"
+                >
                   Términos y condiciones
                 </label>
               </div>
             </div>
             <div class="flex items-center justify-between">
-              <button
-                class="w-full bg-green-900 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
-                type="button"
-              >
-                Sign In
-              </button>
+              <SButton
+                type="submit"
+                styling="success"
+                text="Ingresar"
+                typeof="submit"
+              />
             </div>
             <div class="flex justify-between mt-2">
               <a
-                class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-green-700"
                 href="#"
               >
                 ¿No eres asociado?
               </a>
               <a
-                class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-green-700"
                 href="#"
               >
                 ¿Olvidas te tu contraseña?
