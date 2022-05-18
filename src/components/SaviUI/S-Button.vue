@@ -14,30 +14,18 @@ defineProps<{
   text: string;
   type?: string;
   styling: string;
+  disabled?: boolean;
+  loading?: boolean;
+  onClick?: (event: MouseEvent) => void;
 }>();
-
-const emit = defineEmits(["click", "mouseenter", "mouseleave"]);
-
-const onClick = (e: MouseEvent) => {
-  emit("click", e);
-};
-
-const onMouseEnter = (e: MouseEvent) => {
-  emit("mouseenter", e);
-};
-
-const onMouseLeave = (e: MouseEvent) => {
-  emit("mouseleave", e);
-};
 </script>
 <template>
   <button
-    class="w-full font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+    class="w-full font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline disabled:bg-opacity-50 loading:-opacity-50"
     :type="type"
     :class="style[styling]"
     @click="onClick"
-    @mouseenter="onMouseEnter"
-    @mouseleave="onMouseLeave"
+    :disabled="disabled"
   >
     {{ text }}
   </button>

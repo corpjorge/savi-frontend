@@ -70,6 +70,7 @@ const state = reactive({
                 styling="success"
                 text="Ingresar"
                 typeof="submit"
+                :disabled="false"
               />
             </div>
             <div class="flex justify-between mt-2">
