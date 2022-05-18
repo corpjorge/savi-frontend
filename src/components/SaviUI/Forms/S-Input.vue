@@ -52,6 +52,7 @@ const onBlur = (e: MouseEvent) => {
     :required="required"
     :name="name"
     :id="id"
+    :type="type"
     @change="onChange"
     @keydown="onKeyDown($event)"
     @keyup="onKeyUp($event)"

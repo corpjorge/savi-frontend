@@ -4,12 +4,25 @@ import SButton from "@/components/SaviUI/S-Button.vue";
 import SInput from "@/components/SaviUI/Forms/S-Input.vue";
 import SCheckbox from "@/components/SaviUI/Forms/S-Checkbox.vue";
 import { reactive } from "vue";
+import { authenticate } from "@/api/authenticate";
+import { useRouter, useRoute } from "vue-router";
+
+const router = useRouter();
+const route = useRoute();
 
 const state = reactive({
   email: "",
   password: "",
   TermsAndConditions: false,
+  device_name: "lds",
 });
+
+const onSubmit = () => {
+  authenticate(state).then(() => {
+    router.push("/inicio");
+  });
+  console.log(state);
+};
 </script>
 <template>
   <LayoutDefault>
@@ -24,7 +37,7 @@ const state = reactive({
           Ingresa tu correo electrónico y contraseña.
         </p>
         <div class="w-full">
-          <form class="my-4">
+          <form @submit.prevent="onSubmit" class="my-4" method="post">
             <div class="mb-4">
               <label class="text-gray-600 text-sm font-semibold" for="email">
                 Correo electrónico
@@ -37,7 +50,6 @@ const state = reactive({
                 v-model="state.email"
               />
             </div>
-            {{ state.email }}
             <div class="mb-3">
               <label class="text-gray-600 text-sm font-semibold" for="password">
                 Password
@@ -47,6 +59,7 @@ const state = reactive({
                 id="password"
                 type="password"
                 placeholder="******************"
+                v-model="state.password"
               />
             </div>
             <div class="mb-3">
