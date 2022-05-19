@@ -1,5 +1,4 @@
-export function validateNumericType(e: { target: { value: string } }) {
-  const { value } = e.target;
+export function validateNumericType(value: string) {
   if (value.length > 0) {
     if (isNaN(Number(value))) {
       return false;
@@ -10,29 +9,25 @@ export function validateNumericType(e: { target: { value: string } }) {
   }
 }
 
-export function minLength(e: { target: { value: string } }, min: number) {
-  const { value } = e.target;
+export function minLength(value: string, min: number) {
   if (value.length > 0) {
     return value.length < min;
   }
 }
 
-export function maxLength(e: { target: { value: string } }, max: number) {
-  const { value } = e.target;
+export function maxLength(value: string, max: number) {
   if (value.length > 0) {
     return value.length > max;
   }
 }
 
-export function validateSpecialCharacters(e: { target: { value: string } }) {
-  const { value } = e.target;
+export function validateSpecialCharacters(value: string) {
   if (value.length > 0) {
     return !/^[a-zA-Z0-9-_]+$/.test(value);
   }
 }
 
-export function validateRepeatedCharacters(e: { target: { value: string } }) {
-  const { value } = e.target;
+export function validateRepeatedCharacters(value: string) {
   let a = 0;
   if (value.length > 0) {
     for (let i = 0; i < value?.length; i++) {
@@ -49,8 +44,7 @@ export function validateRepeatedCharacters(e: { target: { value: string } }) {
   }
 }
 
-export function validateMinTwoNumbers(e: { target: { value: string } }) {
-  const { value } = e.target;
+export function validateMinTwoNumbers(value: string) {
   if (value.length > 0) {
     const character = [];
     for (let i = 0; i < value?.length; i++) {
@@ -63,9 +57,14 @@ export function validateMinTwoNumbers(e: { target: { value: string } }) {
   }
 }
 
-export function required(e: { target: { value: string } }) {
-  const { value } = e.target;
+export function required(value: string) {
   if (value.length === 0) {
     return true;
+  }
+}
+
+export function validateEmail(value: string) {
+  if (value.length > 0) {
+    return !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
   }
 }

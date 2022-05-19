@@ -6,6 +6,7 @@ import SCheckbox from "@/components/SaviUI/Forms/S-Checkbox.vue";
 import { reactive } from "vue";
 import { authenticate } from "@/api/authenticate";
 import { useRouter, useRoute } from "vue-router";
+import { validateLogin } from "@/utils/validateLogin";
 
 const router = useRouter();
 const route = useRoute();
@@ -14,14 +15,32 @@ const state = reactive({
   email: "",
   password: "",
   TermsAndConditions: false,
-  device_name: "lds",
+  device_name: "PC",
 });
 
+let errors = reactive({
+  email: "",
+  password: "",
+  TermsAndConditions: "",
+});
+
+let msg;
 const onSubmit = () => {
-  authenticate(state).then(() => {
-    router.push("/inicio");
-  });
-  console.log(state);
+  msg = validateLogin(state);
+  if (msg) {
+    errors.email = msg?.email || "";
+    errors.password = msg?.password || "";
+    errors.TermsAndConditions = msg?.TermsAndConditions || "";
+    return;
+  }
+
+  authenticate(state)
+    .then(() => {
+      router.push("/inicio");
+    })
+    .catch(() => {
+      errors.email = "Usuario o contraseña incorrectos";
+    });
 };
 </script>
 <template>
@@ -38,7 +57,7 @@ const onSubmit = () => {
         </p>
         <div class="w-full">
           <form @submit.prevent="onSubmit" class="my-4" method="post">
-            <div class="mb-4">
+            <div>
               <label class="text-gray-600 text-sm font-semibold" for="email">
                 Correo electrónico
               </label>
@@ -48,9 +67,14 @@ const onSubmit = () => {
                 id="email"
                 placeholder="Ingresa tu correo electrónico"
                 v-model="state.email"
+                :invalid="!!errors.email"
+                @keyup="errors.email = ''"
               />
             </div>
-            <div class="mb-3">
+            <span class="text-red-500 text-xs italic ml-2">
+              {{ errors.email ? errors.email : "" }}
+            </span>
+            <div>
               <label class="text-gray-600 text-sm font-semibold" for="password">
                 Password
               </label>
@@ -60,22 +84,32 @@ const onSubmit = () => {
                 type="password"
                 placeholder="******************"
                 v-model="state.password"
+                :invalid="!!errors.password"
+                @keyup="errors.password = ''"
               />
             </div>
+            <span class="text-red-500 text-xs italic ml-2">
+              {{ errors.password ? errors.password : "" }}
+            </span>
             <div class="mb-3">
               <div>
                 <SCheckbox
                   v-model="state.TermsAndConditions"
                   name="TermsAndConditions"
                   id="TermsAndConditions"
+                  :invalid="!!errors.TermsAndConditions"
+                  @change="errors.TermsAndConditions = ''"
                 />
                 <label
-                  class="text-red-500 text-xs italic"
+                  class="text-blue-900 text-xs italic"
                   for="TermsAndConditions"
                 >
                   Términos y condiciones
                 </label>
               </div>
+              <span class="text-red-500 text-xs italic ml-2">
+                {{ errors.TermsAndConditions ? errors.TermsAndConditions : "" }}
+              </span>
             </div>
             <div class="flex items-center justify-between">
               <SButton

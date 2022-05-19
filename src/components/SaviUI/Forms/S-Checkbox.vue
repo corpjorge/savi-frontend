@@ -7,6 +7,7 @@ defineProps<{
   disabled?: boolean;
   readonly?: boolean;
   required?: boolean;
+  invalid?: boolean;
   name?: string;
   id?: string;
   onChange?: (value: string) => void;
@@ -14,7 +15,7 @@ defineProps<{
 </script>
 <template>
   <input
-    class="accent-green-900 ml-2"
+    :class="'accent-green-900 ml-2' + (invalid ? ' border-red-500' : '')"
     type="checkbox"
     :id="id"
     :name="name"

@@ -7,6 +7,7 @@ defineProps<{
   disabled?: boolean;
   readonly?: boolean;
   required?: boolean;
+  invalid?: boolean;
   name?: string;
   id?: string;
   onKeyUp?: (event: KeyboardEvent) => void;
@@ -45,7 +46,10 @@ const onBlur = (e: MouseEvent) => {
 </script>
 <template>
   <input
-    class="border border-gray-300 rounded-lg | w-full py-2 px-3 mt-2 | text-gray-700 | focus:outline-none focus:border-green-900"
+    :class="
+      'border border-gray-300 rounded-lg | w-full py-2 px-3 mt-2 | text-gray-700 | focus:outline-none focus:border-green-900 ' +
+      (invalid ? 'border-red-500' : '')
+    "
     :placeholder="placeholder"
     :disabled="disabled"
     :readonly="readonly"
