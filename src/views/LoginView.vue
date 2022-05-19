@@ -26,8 +26,8 @@ const onSubmit = () => {
 </script>
 <template>
   <LayoutDefault>
-    <div class="flex sm:justify-center lg:justify-between">
-      <div class="mt-12 md:mt-40 md:mr-10">
+    <div class="flex justify-center mt-10 lg:mt-12 mx-5 lg:m-0">
+      <div class="">
         <h1
           class="text-gray-800 text-4xl font-semibold text-center lg:text-left"
         >
@@ -88,13 +88,13 @@ const onSubmit = () => {
             </div>
             <div class="flex justify-between mt-2">
               <a
-                class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-green-700"
+                class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-green-800"
                 href="#"
               >
-                ¿No eres asociado?
+                Regístrate
               </a>
               <a
-                class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-green-700"
+                class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-green-800"
                 href="#"
               >
                 ¿Olvidas te tu contraseña?
@@ -105,9 +105,6 @@ const onSubmit = () => {
             &copy;2022 SAVI. All rights reserved.
           </p>
         </div>
-      </div>
-      <div class="hidden lg:block mt-52 xl:mt-20 w-1/2 xl:w-auto">
-        <img src="/img/login.png" alt="login_img" />
       </div>
     </div>
   </LayoutDefault>

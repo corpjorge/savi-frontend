@@ -1,7 +1,7 @@
 <template>
-  <div class="m-5 sm:m-10 | lg:flex justify-center">
-    <div class="text-center lg:text-left">
-      <i class="savi savi-logo | p-0 text-4xl text-green-900"></i>
+  <div class="justify-center">
+    <div class="text-center mt-10 lg:mt-32">
+      <i class="savi savi-logo | text-4xl text-green-900 lg:text-7xl"></i>
     </div>
     <slot></slot>
   </div>
