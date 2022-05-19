@@ -37,6 +37,7 @@ const onSubmit = () => {
   authenticate(state)
     .then(() => {
       router.push("/inicio");
+      sessionStorage.setItem("token", JSON.stringify(state));
     })
     .catch(() => {
       errors.email = "Usuario o contraseña incorrectos";
