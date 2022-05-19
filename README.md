@@ -1,6 +1,6 @@
 # savi-frontend
 
-![example workflow](https://github.com/corpjorge/savi-frontend/actions/workflows/node.js.yml/badge.svg)
+![example workflow](https://github.com/corpjorge/savi-frontend/actions/workflows/lint.yml/badge.svg)
 
 This template should help get you started developing with Vue 3 in Vite.
 
