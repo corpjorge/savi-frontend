@@ -13,8 +13,7 @@ import SButton from "@/components/SaviUI/S-Button.vue";
       </div>
       <div class="flex justify-center text-center">
         <p class="my-6 lg:w-[44rem] text-gray-600 text-center">
-          Hemos enviado un correo electrónico a
-          <span class="font-semibold">xxx</span> con un enlace para verificar tu
+          Hemos enviado un correo electrónico con un enlace para verificar tu
           cuenta. Recuerda también validar tu bandeja de correos no deseados o
           Spam
         </p>
