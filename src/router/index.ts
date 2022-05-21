@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Login from "../views/LoginView.vue";
 import Home from "../views/HomeView.vue";
+import { user } from "@/api/user";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,12 +24,18 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach(async (to, from) => {
-  const isAuthenticated = sessionStorage.getItem("token");
-  if (!isAuthenticated && to.name !== "Login") {
+router.beforeEach(async (to) => {
+  const response = await user();
+
+  if (response.unauthenticated && to.name !== "Login") {
     return { name: "Login" };
   }
-  if (isAuthenticated && to.name === "Login") {
+
+  if (response.verifyEmail && to.name !== "Verify-Email") {
+    return { name: "Verify-Email" };
+  }
+
+  if (!response.unauthenticated && to.name === "Login") {
     return { name: "Home" };
   }
 });
