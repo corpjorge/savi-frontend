@@ -5,11 +5,10 @@ import SInput from "@/components/SaviUI/Forms/S-Input.vue";
 import SCheckbox from "@/components/SaviUI/Forms/S-Checkbox.vue";
 import { reactive } from "vue";
 import { authenticate } from "@/api/authenticate";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import { validateLogin } from "@/utils/validateLogin";
 
 const router = useRouter();
-const route = useRoute();
 
 const state = reactive({
   email: "",
@@ -35,9 +34,9 @@ const onSubmit = () => {
   }
 
   authenticate(state)
-    .then(() => {
-      router.push("/inicio");
-      sessionStorage.setItem("token", JSON.stringify(state));
+    .then((response) => {
+      sessionStorage.setItem("token", response.data);
+      router.push({ name: "home" });
     })
     .catch(() => {
       errors.email = "Usuario o contraseña incorrectos";
