@@ -36,7 +36,8 @@ const onSubmit = () => {
   authenticate(state)
     .then((response) => {
       sessionStorage.setItem("token", response.data);
-      router.push({ name: "home" });
+      router.push({ name: "Home" });
+      console.log(response);
     })
     .catch(() => {
       errors.email = "Usuario o contraseña incorrectos";
