@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import LayoutDefault from "@/components/Layouts/LayoutDefault.vue";
+import LayoutDefault from "@/components/layouts/LayoutDefault.vue";
 import SButton from "@/components/SaviUI/S-Button.vue";
-import SInput from "@/components/SaviUI/Forms/S-Input.vue";
-import SCheckbox from "@/components/SaviUI/Forms/S-Checkbox.vue";
+import SInput from "@/components/SaviUI/forms/S-Input.vue";
+import SCheckbox from "@/components/SaviUI/forms/S-Checkbox.vue";
 import { reactive } from "vue";
 import { authenticate } from "@/api/authenticate";
 import { useRouter } from "vue-router";
