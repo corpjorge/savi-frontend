@@ -12,7 +12,7 @@ export const user = async () => {
   await http
     .get("/user")
     .then((response) => {
-      sessionStorage.setItem("user", JSON.stringify(response.data));
+      localStorage.setItem("user", JSON.stringify(response.data));
       data.user = response.data;
       data.loading = false;
     })

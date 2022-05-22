@@ -8,8 +8,8 @@ const resend = ref(true);
 const count = ref(30);
 
 onMounted(async () => {
-  sessionStorage.getItem("emailCheck") === "true" ||
-  sessionStorage.getItem("emailCheck") == null
+  localStorage.getItem("emailCheck") === "true" ||
+  localStorage.getItem("emailCheck") == null
     ? await sendVerifyEmail()
     : null;
 

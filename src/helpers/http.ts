@@ -5,7 +5,7 @@ const http = axios.create({
 });
 
 http.interceptors.request.use(function (config: any) {
-  const token = sessionStorage.getItem("token");
+  const token = localStorage.getItem("token");
   config.headers.Authorization = token ? `Bearer ${token}` : "";
   return config;
 });

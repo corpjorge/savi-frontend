@@ -35,7 +35,7 @@ const onSubmit = () => {
 
   authenticate(state)
     .then((response) => {
-      sessionStorage.setItem("token", response.data);
+      localStorage.setItem("token", response.data);
       router.push({ name: "Home" });
     })
     .catch(() => {

@@ -4,9 +4,9 @@ export const sendVerifyEmail = async () => {
   return await http
     .post("/email/verification-notification")
     .then(() => {
-      sessionStorage.setItem("emailCheck", String(false));
+      localStorage.setItem("emailCheck", String(false));
     })
     .catch(() => {
-      sessionStorage.setItem("emailCheck", String(true));
+      localStorage.setItem("emailCheck", String(true));
     });
 };
