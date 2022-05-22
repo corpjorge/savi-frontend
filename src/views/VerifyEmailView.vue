@@ -1,6 +1,35 @@
 <script setup lang="ts">
+import { onMounted, ref } from "vue";
 import IconEmail from "@/components/icons/IconEmail.vue";
 import SButton from "@/components/SaviUI/S-Button.vue";
+import { sendVerifyEmail } from "@/api/sendVerifyEmail";
+
+const resend = ref(true);
+const count = ref(30);
+
+onMounted(async () => {
+  sessionStorage.getItem("emailCheck") === "true" ||
+  sessionStorage.getItem("emailCheck") == null
+    ? await sendVerifyEmail()
+    : null;
+
+  setInterval(() => {
+    if (count.value === 0) {
+      return (resend.value = false);
+    }
+    count.value = count.value - 1;
+  }, 1000);
+
+  setTimeout(() => {
+    resend.value = false;
+  }, 30000);
+});
+
+const resendVerifyEmail = () => {
+  sendVerifyEmail();
+  count.value = 30;
+  resend.value = true;
+};
 </script>
 <template>
   <div class="mt-24 mx-5">
@@ -19,14 +48,19 @@ import SButton from "@/components/SaviUI/S-Button.vue";
         </p>
       </div>
 
+      <p class="mb-1 text-sm text-gray-600 text-center">
+        Podrás renviar el mensaje en <span class="font-bold">{{ count }}</span>
+      </p>
+
       <div class="flex justify-center items-center">
         <div class="w-80">
           <SButton
+            @click="resendVerifyEmail"
             type="submit"
             styling="success"
             text="Renviar mensaje"
             typeof="submit"
-            :disabled="true"
+            :disabled="resend"
           />
         </div>
       </div>
