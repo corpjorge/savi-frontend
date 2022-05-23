@@ -35,7 +35,7 @@ const resendVerifyEmail = async () => {
   resend.value = true;
 
   response.VerificationAlreadyDone === true
-    ? await router.push({ name: "Home" })
+    ? await router.push({ name: "Dashboard" })
     : null;
 
   loading.value = false;
