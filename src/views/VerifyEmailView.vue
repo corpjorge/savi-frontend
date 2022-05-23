@@ -3,9 +3,12 @@ import { onMounted, ref } from "vue";
 import IconEmail from "@/components/icons/IconEmail.vue";
 import SButton from "@/components/SaviUI/S-Button.vue";
 import { sendVerifyEmail } from "@/api/sendVerifyEmail";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const resend = ref(true);
 const count = ref(30);
+const loading = ref(false);
 
 onMounted(async () => {
   localStorage.getItem("emailCheck") === "true" ||
@@ -25,10 +28,17 @@ onMounted(async () => {
   }, 30000);
 });
 
-const resendVerifyEmail = () => {
-  sendVerifyEmail();
+const resendVerifyEmail = async () => {
+  loading.value = true;
+  const response = await sendVerifyEmail();
   count.value = 30;
   resend.value = true;
+
+  response.VerificationAlreadyDone === true
+    ? await router.push({ name: "Home" })
+    : null;
+
+  loading.value = false;
 };
 </script>
 <template>
@@ -51,6 +61,13 @@ const resendVerifyEmail = () => {
       <p class="mb-1 text-sm text-gray-600 text-center">
         Podrás renviar el mensaje en <span class="font-bold">{{ count }}</span>
       </p>
+
+      <span class="text-xs text-gray-500" v-if="loading">
+        ...Renviando mensaje
+      </span>
+      <span class="text-xs text-blue-100" v-if="!loading && resend">
+        Mensaje reenviado
+      </span>
 
       <div class="flex justify-center items-center">
         <div class="w-80">
