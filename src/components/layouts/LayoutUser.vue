@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
+import { logout } from "@/api/logout";
 
 const router = useRouter();
 const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -7,9 +8,28 @@ const user = JSON.parse(localStorage.getItem("user") || "{}");
 if (user.type <= 3) {
   router.push({ name: "Home-Admin" });
 }
+
+const closeSession = () => {
+  logout().then(() => {
+    localStorage.clear();
+    router.push({ name: "Login" });
+  });
+};
 </script>
 <template>
-  <div class="m-5 sm:m-10 lg:m-32">
+  <div
+    class="mx-5 sm:mx-10 lg:mx-32 mt-6 sm:mt-10 lg:mt-8 | flex justify-between"
+  >
+    <h1 class="text-lg sm:text-xl font-semibold text-green-900">Bienvenido</h1>
+    <label
+      class="font-medium text-brown-700 border border-brown-700 px-5 rounded-lg cursor-pointer hover:bg-brown-700 hover:text-white"
+      @click="closeSession"
+    >
+      Cerrar
+    </label>
+  </div>
+  <hr class="bg-blue-500 my-7 border-[1.5px]" />
+  <div class="mx-5 sm:mx-10 lg:mx-32 mt-8 sm:my-5 lg:my-10">
     <router-view />
   </div>
 </template>
