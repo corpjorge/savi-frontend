@@ -9,5 +9,7 @@ if (user.type <= 3) {
 }
 </script>
 <template>
-  <router-view />
+  <div class="m-5 sm:m-10 lg:m-32">
+    <router-view />
+  </div>
 </template>
