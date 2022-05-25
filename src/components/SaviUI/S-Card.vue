@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
-
 const style = {
   primary: "bg-green-900 text-white",
   secondary: "bg-gray-200 text-gray-800",
