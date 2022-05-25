@@ -31,7 +31,7 @@ defineProps<{
 <template>
   <div
     :class="
-      'w-60 p-8 rounded-3xl shadow hover:shadow-xl cursor-pointer ' +
+      'w-full sm:w-60 p-8 rounded-3xl shadow hover:shadow-xl cursor-pointer ' +
       style[styling]
     "
   >

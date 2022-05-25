@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import LoaderComponents from "@/components/LoaderComponents.vue";
 import ScheduleComponent from "@/components/ScheduleComponent.vue";
+import SCardLogo from "@/components/SaviUI/S-Card-Logo.vue";
 const isLoggedIn = ref(false);
 </script>
 <template>
@@ -9,10 +10,26 @@ const isLoggedIn = ref(false);
   <template v-else>
     <div class="grid grid-cols-1 sm:grid-cols-2">
       <div>
+        <div class="flex flex-col items-center sm:hidden mb-5">
+          <SCardLogo
+            url-img="https://fedef.savinteractivo.com/storage/logo.png"
+            url-site="https://fedef-co.com/"
+            name="Fedef"
+          />
+        </div>
         <ScheduleComponent />
       </div>
+      <hr class="sm:hidden bg-blue-500 my-7 border-[1.5px]" />
       <div class="sm:border-l-[1.5px] sm:border-l-blue-500 mt-8 sm:m-0">
-        <div class="sm:ml-10 lg:ml-20 sm:mr-2">02</div>
+        <div class="sm:ml-10 lg:ml-20 sm:mr-2">
+          <div class="hidden sm:flex flex-col items-center">
+            <SCardLogo
+              url-img="https://fedef.savinteractivo.com/storage/logo.png"
+              url-site="https://fedef-co.com/"
+              name="Fedef"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </template>
