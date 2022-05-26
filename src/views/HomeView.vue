@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import LoaderComponents from "@/components/LoaderComponents.vue";
+import LoaderComponents from "@/components/LoaderComponent.vue";
 import ScheduleComponent from "@/components/ScheduleComponent.vue";
 import SCardLogo from "@/components/SaviUI/S-Card-Logo.vue";
 import ApplicationListComponent from "@/components/ApplicationListComponent.vue";
