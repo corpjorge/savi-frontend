@@ -15,8 +15,8 @@ defineProps<{
     <h2 class="text-gray-800">{{ admin }}</h2>
     <div class="flex justify-between">
       <span class="mt-6 text-lg text-red-400 uppercase">{{ state }}</span>
-      <div class="w-28">
-        <SButton class="mt-4" styling="primary" text="Ver" />
+      <div class="w-24">
+        <SButton class="mt-4" styling="secondary" text="Ver" />
       </div>
     </div>
   </div>
