@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import IconVideoCam from "@/components/icons/IconVideoCam.vue";
+import CalendarComponent from "@/components/CalendarComponent.vue";
 </script>
 <template>
   <div
@@ -24,7 +25,7 @@ import IconVideoCam from "@/components/icons/IconVideoCam.vue";
 
     <div class="fixed z-10 inset-0 overflow-y-auto">
       <div
-        class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0"
+        class="flex items-end sm:items-center justify-center min-h-full p-2 text-center sm:p-0"
       >
         <!--
           Modal panel, show/hide based on modal state.
@@ -39,14 +40,14 @@ import IconVideoCam from "@/components/icons/IconVideoCam.vue";
         <div
           class="relative bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full"
         >
-          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="bg-white px-2 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div class="sm:flex sm:items-start">
               <div
                 class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
               >
                 <IconVideoCam />
               </div>
-              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <div class="mt-1 text-center sm:mt-0 sm:ml-4 sm:text-left">
                 <h3
                   class="text-lg leading-6 font-medium text-gray-900"
                   id="modal-title"
@@ -54,10 +55,11 @@ import IconVideoCam from "@/components/icons/IconVideoCam.vue";
                   Agenda tu cita virtual
                 </h3>
                 <div class="mt-2">
-                  <p class="text-sm text-gray-500">
-                    Selecciona la fecha la hora y el asesor disponible.
+                  <p class="mb-2 text-md text-gray-500">
+                    Selecciona la fecha, la hora y el asesor disponible.
                   </p>
-                  <input type="date" min="2019-06-02" max="2019-06-08" />
+                  <hr class="border-b-2 border-gray-100" />
+                  <CalendarComponent />
                 </div>
               </div>
             </div>
