@@ -79,7 +79,6 @@ export function calendar(selectedDay: number) {
       : null;
   }
 
-  console.log(month);
   return {
     dates,
     currentDay,
