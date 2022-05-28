@@ -22,6 +22,7 @@ defineProps<{
     xml:space="preserve"
   >
     <polygon
+      :fill="fill"
       points="45.268,1.414 43.854,0 14.146,29.707 43.854,59.414 45.268,58 16.975,29.707 "
     />
   </svg>

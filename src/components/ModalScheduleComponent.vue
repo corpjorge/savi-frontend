@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import IconVideoCam from "@/components/icons/IconVideoCam.vue";
 import CalendarComponent from "@/components/CalendarComponent.vue";
+import TimeSelection from "@/components/TimeSelection.vue";
 </script>
 <template>
   <div
@@ -60,6 +61,7 @@ import CalendarComponent from "@/components/CalendarComponent.vue";
                   </p>
                   <hr class="border-b-2 border-gray-100" />
                   <CalendarComponent />
+                  <TimeSelection />
                 </div>
               </div>
             </div>

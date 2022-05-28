@@ -61,18 +61,24 @@ const nextMonth = () => {
   <h1 class="my-3 ml-7 text-lg text-left capitalize flex justify-between">
     <div>{{ date.currentMonth }}, {{ date.year }}</div>
     <div class="flex">
-      <IconLeft
-        class="cursor-pointer border border-gray-300 rounded-full p-1 mr-3"
-        :width="25"
-        :height="25"
-        @click="prevMonth"
-      />
-      <IconRight
-        class="cursor-pointer border border-gray-300 rounded-full p-1 mr-3"
-        :width="25"
-        :height="25"
-        @click="nextMonth"
-      />
+      <div>
+        <IconLeft
+          class="cursor-pointer border border-gray-300 rounded-full p-1 mr-3 bg-blue-600 text-base font-medium text-white hover:bg-blue-700"
+          :width="25"
+          :height="25"
+          fill="white"
+          @click="prevMonth"
+        />
+      </div>
+      <div>
+        <IconRight
+          class="cursor-pointer border border-gray-300 rounded-full p-1 mr-3 bg-blue-600 text-base font-medium text-white hover:bg-blue-700"
+          :width="25"
+          :height="25"
+          fill="white"
+          @click="nextMonth"
+        />
+      </div>
     </div>
   </h1>
   <div class="flex content-center text-center justify-center h-[19rem]">
@@ -84,7 +90,7 @@ const nextMonth = () => {
         :key="day"
         :class="
           'text-xl font-medium border rounded-lg p-1 sm:p-2 mb-2 ml-2 ' +
-          (date.currentDay === day
+          (date.currentDay === day && Number(date.month) === currentMonth
             ? 'text-blue-500 cursor-pointer'
             : 'text-gray-600') +
           (date.currentDay > day && Number(date.month) === currentMonth
