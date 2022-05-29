@@ -3,7 +3,9 @@ import { calendar } from "@/utils/calendar";
 import IconLeft from "@/components/icons/IconLeft.vue";
 import IconRight from "@/components/icons/IconRight.vue";
 import { onMounted, reactive, ref } from "vue";
+import { useSelectedDateStore } from "@/stores/selectedDate";
 
+const selectedDate = useSelectedDateStore();
 const selectDay = ref(1);
 const currentMonth = ref(new Date().getMonth() + 1);
 
@@ -56,6 +58,12 @@ const nextMonth = () => {
   date.selectedDay = response.selectedDay;
   date.month = response.month;
 };
+
+const daySelect = (day: number) => {
+  selectedDate.dateSelect = true;
+  selectedDate.date = day + " " + date.currentMonth + ", " + date.year;
+  selectDay.value = day;
+};
 </script>
 <template>
   <h1 class="my-3 ml-7 text-lg text-left capitalize flex justify-between">
@@ -98,6 +106,7 @@ const nextMonth = () => {
             : ' cursor-pointer hover:border-blue-500') +
           (day === 0 ? ' border-none mb-[2.35rem]' : '')
         "
+        @click="daySelect(day)"
       >
         {{ day !== 0 ? day : "" }}
       </div>

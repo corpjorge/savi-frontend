@@ -2,6 +2,8 @@
 import IconVideoCam from "@/components/icons/IconVideoCam.vue";
 import CalendarComponent from "@/components/CalendarComponent.vue";
 import TimeSelection from "@/components/TimeSelection.vue";
+import { useSelectedDateStore } from "@/stores/selectedDate";
+const selectedDate = useSelectedDateStore();
 </script>
 <template>
   <div
@@ -60,8 +62,8 @@ import TimeSelection from "@/components/TimeSelection.vue";
                     Selecciona la fecha, la hora y el asesor disponible.
                   </p>
                   <hr class="border-b-2 border-gray-100" />
-                  <CalendarComponent />
-                  <TimeSelection />
+                  <CalendarComponent v-if="!selectedDate.dateSelect" />
+                  <TimeSelection v-if="selectedDate.dateSelect" />
                 </div>
               </div>
             </div>

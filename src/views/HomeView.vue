@@ -8,7 +8,7 @@ import ApplicationListComponent from "@/components/ApplicationListComponent.vue"
 const isLoggedIn = ref(false);
 </script>
 <template>
-  <LoaderComponents v-if="isLoggedIn" />
+  <LoaderComponents class-name="mt-32" v-if="isLoggedIn" />
   <template v-else>
     <div class="grid grid-cols-1 sm:grid-cols-2">
       <div>
