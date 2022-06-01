@@ -1,5 +1,5 @@
 <script setup lang="ts">
-var value;
+let value;
 
 defineProps<{
   type?: string;

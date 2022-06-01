@@ -33,6 +33,16 @@ onMounted(async () => {
       <LoaderComponent class-name="my-28" />
     </div>
     <div v-else>
+      <select v-model="value" :disabled="disabled">
+        <option
+          class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          v-for="(option, index) in advisers"
+          :value="option.id"
+          :key="index"
+        >
+          {{ option.name }}
+        </option>
+      </select>
       <div v-for="(adviser, index) in advisers" :key="index">
         {{ adviser.name }}
       </div>

@@ -92,7 +92,6 @@ const daySelect = (day: number) => {
   <div class="flex content-center text-center justify-center h-[19rem]">
     <div v-for="(d, index) in date.dates" :key="index" class="text-center">
       <div class="text-sm text-gray-600 mb-2">{{ index }}</div>
-
       <div
         v-for="day in d"
         :key="day"
@@ -106,7 +105,11 @@ const daySelect = (day: number) => {
             : ' cursor-pointer hover:border-blue-500') +
           (day === 0 ? ' border-none mb-[2.35rem]' : '')
         "
-        @click="daySelect(day)"
+        @click="
+          date.currentDay > day && Number(date.month) === currentMonth
+            ? ''
+            : daySelect(day)
+        "
       >
         {{ day !== 0 ? day : "" }}
       </div>
