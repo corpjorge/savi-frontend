@@ -4,6 +4,7 @@ import IconLeft from "@/components/icons/IconLeft.vue";
 import IconRight from "@/components/icons/IconRight.vue";
 import { onMounted, reactive, ref } from "vue";
 import { useSelectedDateStore } from "@/stores/selectedDate";
+import CalendarDays from "@/components/ScheduleMeeting/CalendarDays.vue";
 
 const selectedDate = useSelectedDateStore();
 const selectDay = ref(1);
@@ -62,7 +63,7 @@ const nextMonth = () => {
 const daySelect = (day: number) => {
   selectedDate.dateSelect = true;
   selectedDate.date = day + " " + date.currentMonth + ", " + date.year;
-  selectDay.value = day;
+  // selectDay.value = day;
 };
 </script>
 <template>
@@ -90,29 +91,12 @@ const daySelect = (day: number) => {
     </div>
   </h1>
   <div class="flex content-center text-center justify-center h-[19rem]">
-    <div v-for="(d, index) in date.dates" :key="index" class="text-center">
-      <div class="text-sm text-gray-600 mb-2">{{ index }}</div>
-      <div
-        v-for="day in d"
-        :key="day"
-        :class="
-          'text-xl font-medium border rounded-lg p-1 sm:p-2 mb-2 ml-2 ' +
-          (date.currentDay === day && Number(date.month) === currentMonth
-            ? 'text-blue-500 cursor-pointer'
-            : 'text-gray-600') +
-          (date.currentDay > day && Number(date.month) === currentMonth
-            ? ' text-gray-400 cursor-no-drop'
-            : ' cursor-pointer hover:border-blue-500') +
-          (day === 0 ? ' border-none mb-[2.35rem]' : '')
-        "
-        @click="
-          date.currentDay > day && Number(date.month) === currentMonth
-            ? ''
-            : daySelect(day)
-        "
-      >
-        {{ day !== 0 ? day : "" }}
-      </div>
-    </div>
+    <CalendarDays
+      :dates="date.dates"
+      :currentMonth="currentMonth"
+      :current-day="date.currentDay"
+      :day-select="daySelect"
+      :month="date.month"
+    />
   </div>
 </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import IconVideoCam from "@/components/icons/IconVideoCam.vue";
-import CalendarComponent from "@/components/CalendarComponent.vue";
-import TimeSelection from "@/components/TimeSelection.vue";
+import CalendarComponent from "@/components/ScheduleMeeting/CalendarComponent.vue";
+import TimeSelection from "@/components/ScheduleMeeting/TimeSelection.vue";
 import { useSelectedDateStore } from "@/stores/selectedDate";
 const selectedDate = useSelectedDateStore();
 </script>
