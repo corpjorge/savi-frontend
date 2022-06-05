@@ -20,9 +20,9 @@ export const useMeetingsMonths = async (months: number) => {
           };
         }
       );
-      useSessionStorage("meetings-months", meetings.value);
     });
+    await useSessionStorage("meetings-months", meetings.value);
   }
 
-  return sessionMeetingsMonths;
+  return sessionMeetingsMonths || meetings.value;
 };
