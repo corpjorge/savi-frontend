@@ -28,6 +28,7 @@ onMounted(() => {
   date.currentMonth = response.currentMonth;
   date.selectedDay = response.selectedDay;
   date.month = response.month;
+  console.log(date);
 });
 
 const prevMonth = () => {
@@ -63,7 +64,6 @@ const nextMonth = () => {
 const daySelect = (day: number) => {
   selectedDate.dateSelect = true;
   selectedDate.date = day + " " + date.currentMonth + ", " + date.year;
-  // selectDay.value = day;
 };
 </script>
 <template>
@@ -72,20 +72,30 @@ const daySelect = (day: number) => {
     <div class="flex">
       <div>
         <IconLeft
-          class="cursor-pointer border border-gray-300 rounded-full p-1 mr-3 bg-blue-600 text-base font-medium text-white hover:bg-blue-700"
+          :class="
+            'border border-gray-300 rounded-full p-1 mr-3 ' +
+            (currentMonth === date.month
+              ? ' '
+              : 'bg-blue-600 hover:bg-blue-700 cursor-pointer ')
+          "
           :width="25"
           :height="25"
-          fill="white"
-          @click="prevMonth"
+          :fill="currentMonth === date.month ? 'black' : 'white'"
+          @click="currentMonth === date.month ? '' : prevMonth()"
         />
       </div>
       <div>
         <IconRight
-          class="cursor-pointer border border-gray-300 rounded-full p-1 mr-3 bg-blue-600 text-base font-medium text-white hover:bg-blue-700"
+          :class="
+            'border border-gray-300 rounded-full p-1 mr-3 ' +
+            (currentMonth + 2 === date.month
+              ? ''
+              : 'bg-blue-600 hover:bg-blue-700 cursor-pointer')
+          "
           :width="25"
           :height="25"
-          fill="white"
-          @click="nextMonth"
+          :fill="currentMonth + 2 === date.month ? 'black' : 'white'"
+          @click="currentMonth + 2 === date.month ? ' ' : nextMonth()"
         />
       </div>
     </div>
