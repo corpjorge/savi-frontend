@@ -2,6 +2,7 @@
 import { onMounted, ref } from "vue";
 import LoaderComponent from "@/components/LoaderComponent.vue";
 import { useMeetingsMonths } from "@/hooks/useMeetingsMonths";
+import { HOLIDAYS } from "@/utils/holidays";
 
 const meetings = ref<any>();
 
@@ -35,7 +36,8 @@ defineProps<{
           (currentDay > day && Number(month) === currentMonth ||
            meetings.filter((date: any) => { return date.month === month && date.day === day }).length >= 10 ||
            index === 'DO' ||
-           new Date().getHours() >= 17
+           HOLIDAYS.some((holiday: any) => { return holiday.month === month && holiday.day === day; }) ||
+           (currentDay === day &&  currentMonth === Number(month) && new Date().getHours() >= 17)
             ? ' text-gray-400 cursor-no-drop'
             : ' cursor-pointer hover:border-blue-500') +
           (day === 0 ? ' border-none mb-[2.35rem]' : '')
@@ -46,7 +48,12 @@ defineProps<{
             return date.month === month && date.day === day;
           }).length >= 10 ||
           index === 'DO' ||
-          new Date().getHours() >= 17
+          HOLIDAYS.some((holiday: any) => {
+            return holiday.month === month && holiday.day === day;
+          }) ||
+          (currentDay === day &&
+            currentMonth === Number(month) &&
+            new Date().getHours() >= 17)
             ? ''
             : daySelect(day)
         "

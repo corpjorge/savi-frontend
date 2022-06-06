@@ -28,7 +28,6 @@ onMounted(() => {
   date.currentMonth = response.currentMonth;
   date.selectedDay = response.selectedDay;
   date.month = response.month;
-  console.log(date);
 });
 
 const prevMonth = () => {
