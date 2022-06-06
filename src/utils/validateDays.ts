@@ -30,7 +30,7 @@ export function validateDays(
     return (
       currentDay === day &&
       currentMonth === Number(month) &&
-      new Date().getHours() >= 17
+      new Date().getHours() > 14
     );
   }
 
