@@ -4,6 +4,22 @@ import { useAdviser } from "@/hooks/useAdviser";
 import { onMounted, ref } from "vue";
 import IconLeft from "@/components/icons/IconLeft.vue";
 import LoaderComponent from "@/components/LoaderComponent.vue";
+import SSelect from "@/components/SaviUI/forms/S-Select.vue";
+
+const hours = [
+  { value: "8", label: "08:00 a.m. a 9:00 a.m." },
+  { value: "9", label: "09:00 a.m. a 10:00 a.m." },
+  { value: "10", label: "10:00 a.m. a 11:00 a.m." },
+  { value: "11", label: "11:00 a.m. a 12:00 p.m." },
+  { value: "12", label: "12:00 p.m. a 1:00 p.m." },
+  { value: "13", label: "1:00 p.m. a 2:00 p.m." },
+  { value: "14", label: "2:00 p.m. a 3:00 p.m." },
+  { value: "15", label: "3:00 p.m. a 4:00 p.m." },
+  { value: "16", label: "4:00 p.m. a 5:00 p.m. " },
+  { value: "17", label: "5:00 p.m. a 6:00 p.m." },
+];
+
+const hour = ref(0);
 
 const selectedDate = useSelectedDateStore();
 const backToCalendar = () => {
@@ -12,6 +28,7 @@ const backToCalendar = () => {
 
 const advisers = ref([{}]);
 onMounted(async () => {
+  // sessionMeetingsMonths = JSON.parse(sessionStorage.getItem("meetings-months") as string);
   advisers.value = await useAdviser();
 });
 </script>
@@ -33,16 +50,8 @@ onMounted(async () => {
       <LoaderComponent class-name="my-28" />
     </div>
     <div v-else>
-      <select v-model="value" :disabled="disabled">
-        <option
-          class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-          v-for="(option, index) in advisers"
-          :value="option.id"
-          :key="index"
-        >
-          {{ option.name }}
-        </option>
-      </select>
+      <SSelect v-model="hour" :options="hours" placeholder="Hora de la cita" />
+
       <div v-for="(adviser, index) in advisers" :key="index">
         {{ adviser.name }}
       </div>
