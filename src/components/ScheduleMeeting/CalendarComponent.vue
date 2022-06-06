@@ -63,6 +63,8 @@ const nextMonth = () => {
 const daySelect = (day: number) => {
   selectedDate.dateSelect = true;
   selectedDate.date = day + " " + date.currentMonth + ", " + date.year;
+  selectedDate.day = day;
+  selectedDate.month = date.month;
 };
 </script>
 <template>
