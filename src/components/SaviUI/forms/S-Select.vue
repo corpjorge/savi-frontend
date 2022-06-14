@@ -1,5 +1,5 @@
 <script setup lang="ts">
-let value;
+let value = "";
 defineProps<{
   disabled?: boolean;
   options: object[];
@@ -7,10 +7,15 @@ defineProps<{
 }>();
 </script>
 <template>
-  <select v-model="value" :disabled="disabled">
-    <option v-if="placeholder" selected>{{ placeholder }}</option>
+  <select
+    class="border border-gray-700 text-sm font-light rounded p-2 w-80"
+    v-model="value"
+    :disabled="disabled"
+  >
+    <option class="text-blue-900" value="" v-if="placeholder" disabled selected>
+      {{ placeholder }}
+    </option>
     <option
-      class="text-blue-900"
       v-for="(option, index) in options"
       :value="option.value"
       :key="index"

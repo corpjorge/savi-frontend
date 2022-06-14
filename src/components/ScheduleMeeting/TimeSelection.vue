@@ -20,6 +20,7 @@ const hours = [
 ];
 
 const hour = ref(0);
+const hoursAvailable = ref<object[]>([]);
 
 const selectedDate = useSelectedDateStore();
 const backToCalendar = () => {
@@ -28,12 +29,41 @@ const backToCalendar = () => {
 
 const advisers = ref([{}]);
 onMounted(async () => {
-  // sessionMeetingsMonths = JSON.parse(sessionStorage.getItem("meetings-months") as string);
   advisers.value = await useAdviser();
+
+  let sessionMeetingsMonths = JSON.parse(
+    sessionStorage.getItem("meetings-months") as string
+  );
+
+  let meetingsNotAvailable = sessionMeetingsMonths.filter(
+    (item: { month: number; day: number }) =>
+      item.month === selectedDate.month && item.day === selectedDate.day
+  );
+
+  let hoursNotAvailable = [] as string[];
+  hours.map((hours: { value: string; label: string }) => {
+    meetingsNotAvailable.map((item: { hour: number }) => {
+      item.hour === Number(hours.value)
+        ? hoursNotAvailable.push(hours.value)
+        : null;
+    });
+  });
+
+  hours.map((hours: { value: string; label: string }) => {
+    !(
+      hoursNotAvailable.filter((item: string) => item === hours.value).length >=
+      advisers.value.length
+    )
+      ? hoursAvailable.value.push({
+          value: hours.value,
+          label: hours.label,
+        })
+      : null;
+  });
 });
 </script>
 <template>
-  <div class="flex align-middle mt-2">
+  <div class="flex align-middle my-2">
     <IconLeft
       class="cursor-pointer border border-gray-300 rounded-full p-1 ml-3 bg-blue-600 text-base font-medium text-white hover:bg-blue-700"
       :width="25"
@@ -49,9 +79,12 @@ onMounted(async () => {
     <div v-if="advisers.length === 1">
       <LoaderComponent class-name="my-28" />
     </div>
-    <div v-else>
-      <SSelect v-model="hour" :options="hours" placeholder="Hora de la cita" />
-
+    <div class="mt-4" v-else>
+      <SSelect
+        v-model="hour"
+        :options="hoursAvailable"
+        placeholder="Hora de la cita"
+      />
       <div v-for="(adviser, index) in advisers" :key="index">
         {{ adviser.name }}
       </div>

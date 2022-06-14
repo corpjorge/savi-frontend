@@ -15,8 +15,8 @@ export const useMeetingsMonths = async (months: number) => {
           return {
             month: new Date(data.date).getMonth() + 1,
             day: new Date(data.date).getDate(),
-            hours: new Date(data.date).getHours(),
-            advisers: data.admin_id,
+            hour: new Date(data.date).getHours(),
+            adviser: data.admin_id,
           };
         }
       );

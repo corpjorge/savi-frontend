@@ -3,7 +3,7 @@ import { reactive } from "vue";
 
 export const useAdviser = async () => {
   const admins = reactive({
-    advisers: [{}],
+    advisers: [] as object[],
   });
 
   await administrator().then((response) => {
