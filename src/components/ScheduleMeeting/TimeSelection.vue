@@ -27,7 +27,8 @@ const backToCalendar = () => {
   selectedDate.dateSelect = false;
 };
 
-const advisers = ref([{}]);
+const advisers = ref<any>([]);
+const meetingsNotAvailable = ref<any>([]);
 onMounted(async () => {
   advisers.value = await useAdviser();
 
@@ -35,14 +36,14 @@ onMounted(async () => {
     sessionStorage.getItem("meetings-months") as string
   );
 
-  let meetingsNotAvailable = sessionMeetingsMonths.filter(
+  meetingsNotAvailable.value = sessionMeetingsMonths.filter(
     (item: { month: number; day: number }) =>
       item.month === selectedDate.month && item.day === selectedDate.day
   );
 
   let hoursNotAvailable = [] as string[];
   hours.map((hours: { value: string; label: string }) => {
-    meetingsNotAvailable.map((item: { hour: number }) => {
+    meetingsNotAvailable.value.map((item: { hour: number }) => {
       item.hour === Number(hours.value)
         ? hoursNotAvailable.push(hours.value)
         : null;
@@ -56,7 +57,7 @@ onMounted(async () => {
     );
   }
 
-  function valedateHoursAvailable(hours: { value: string; label: string }) {
+  function validateHoursAvailable(hours: { value: string; label: string }) {
     return new Date().getDate() >= selectedDate.day
       ? new Date().getHours() < Number(hours.value)
       : true;
@@ -64,7 +65,7 @@ onMounted(async () => {
 
   hours.map((hours: { value: string; label: string }) => {
     if (!numberOfAdvisers(hours)) {
-      if (valedateHoursAvailable(hours)) {
+      if (validateHoursAvailable(hours)) {
         if (selectedDate.dayName == "SA" && Number(hours.value) >= 12) {
           return;
         }
@@ -76,6 +77,28 @@ onMounted(async () => {
     }
   });
 });
+
+const advisorsAvailable = ref<any>([]);
+const selectHour = () => {
+  let advisersNotAvailable = [] as any[];
+  advisorsAvailable.value = [];
+
+  meetingsNotAvailable.value.map((item: { hour: number; adviser: string }) => {
+    item.hour == hour.value ? advisersNotAvailable.push(item.adviser) : null;
+  });
+
+  advisers.value.map((adviser: any) => {
+    if (!advisersNotAvailable.includes(adviser.id)) {
+      if (
+        adviser.break_time?.start == hour.value ||
+        adviser.break_time?.end == hour.value
+      ) {
+        return;
+      }
+      advisorsAvailable.value.push(adviser);
+    }
+  });
+};
 </script>
 <template>
   <div class="flex align-middle my-2">
@@ -96,11 +119,14 @@ onMounted(async () => {
     </div>
     <div class="mt-4" v-else>
       <SSelect
+        @change="selectHour"
         v-model="hour"
         :options="hoursAvailable"
         placeholder="Hora de la cita"
       />
-      <div v-for="(adviser, index) in advisers" :key="index">
+
+      {{ hour }}
+      <div v-for="(adviser, index) in advisorsAvailable" :key="index">
         {{ adviser.name }}
       </div>
     </div>
