@@ -15,7 +15,7 @@ defineProps<{
   currentMonth: number;
   currentDay: number;
   month: number;
-  daySelect: (day: number) => void;
+  daySelect: (day: number, index: string) => void;
 }>();
 </script>
 <template>
@@ -41,7 +41,7 @@ defineProps<{
         @click="
           validateDays(day, month, currentDay, currentMonth, meetings, index)
             ? null
-            : daySelect(day)
+            : daySelect(day, index)
         "
       >
         {{ day !== 0 ? day : "" }}

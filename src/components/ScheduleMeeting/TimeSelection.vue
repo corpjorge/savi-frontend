@@ -49,16 +49,31 @@ onMounted(async () => {
     });
   });
 
-  hours.map((hours: { value: string; label: string }) => {
-    !(
+  function numberOfAdvisers(hours: { value: string; label: string }) {
+    return (
       hoursNotAvailable.filter((item: string) => item === hours.value).length >=
       advisers.value.length
-    )
-      ? hoursAvailable.value.push({
+    );
+  }
+
+  function valedateHoursAvailable(hours: { value: string; label: string }) {
+    return new Date().getDate() >= selectedDate.day
+      ? new Date().getHours() < Number(hours.value)
+      : true;
+  }
+
+  hours.map((hours: { value: string; label: string }) => {
+    if (!numberOfAdvisers(hours)) {
+      if (valedateHoursAvailable(hours)) {
+        if (selectedDate.dayName == "SA" && Number(hours.value) >= 12) {
+          return;
+        }
+        hoursAvailable.value.push({
           value: hours.value,
           label: hours.label,
-        })
-      : null;
+        });
+      }
+    }
   });
 });
 </script>

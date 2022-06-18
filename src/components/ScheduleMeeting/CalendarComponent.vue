@@ -60,11 +60,12 @@ const nextMonth = () => {
   date.month = response.month;
 };
 
-const daySelect = (day: number) => {
+const daySelect = (day: number, index: string) => {
   selectedDate.dateSelect = true;
   selectedDate.date = day + " " + date.currentMonth + ", " + date.year;
   selectedDate.day = day;
   selectedDate.month = date.month;
+  selectedDate.dayName = index;
 };
 </script>
 <template>
