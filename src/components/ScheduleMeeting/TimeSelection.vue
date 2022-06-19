@@ -5,6 +5,10 @@ import { onMounted, ref } from "vue";
 import IconLeft from "@/components/icons/IconLeft.vue";
 import LoaderComponent from "@/components/LoaderComponent.vue";
 import SSelect from "@/components/SaviUI/forms/S-Select.vue";
+import {
+  validateHoursAvailable,
+  numberOfAdvisers,
+} from "@/utils/validateHours";
 
 const hours = [
   { value: "8", label: "08:00 a.m. a 9:00 a.m." },
@@ -50,22 +54,9 @@ onMounted(async () => {
     });
   });
 
-  function numberOfAdvisers(hours: { value: string; label: string }) {
-    return (
-      hoursNotAvailable.filter((item: string) => item === hours.value).length >=
-      advisers.value.length
-    );
-  }
-
-  function validateHoursAvailable(hours: { value: string; label: string }) {
-    return new Date().getDate() >= selectedDate.day
-      ? new Date().getHours() < Number(hours.value)
-      : true;
-  }
-
   hours.map((hours: { value: string; label: string }) => {
-    if (!numberOfAdvisers(hours)) {
-      if (validateHoursAvailable(hours)) {
+    if (!numberOfAdvisers(hours, hoursNotAvailable, advisers.value)) {
+      if (validateHoursAvailable(hours, selectedDate)) {
         if (selectedDate.dayName == "SA" && Number(hours.value) >= 12) {
           return;
         }
@@ -80,24 +71,26 @@ onMounted(async () => {
 
 const advisorsAvailable = ref<any>([]);
 const selectHour = () => {
-  let advisersNotAvailable = [] as any[];
+  let advisersNotAvailable = [] as string[];
   advisorsAvailable.value = [];
 
   meetingsNotAvailable.value.map((item: { hour: number; adviser: string }) => {
     item.hour == hour.value ? advisersNotAvailable.push(item.adviser) : null;
   });
 
-  advisers.value.map((adviser: any) => {
-    if (!advisersNotAvailable.includes(adviser.id)) {
-      if (
-        adviser.break_time?.start == hour.value ||
-        adviser.break_time?.end == hour.value
-      ) {
-        return;
+  advisers.value.map(
+    (adviser: { id: string; break_time: { start: number; end: number } }) => {
+      if (!advisersNotAvailable.includes(adviser.id)) {
+        if (
+          adviser.break_time?.start == hour.value ||
+          adviser.break_time?.end == hour.value
+        ) {
+          return;
+        }
+        advisorsAvailable.value.push(adviser);
       }
-      advisorsAvailable.value.push(adviser);
     }
-  });
+  );
 };
 </script>
 <template>
@@ -114,7 +107,7 @@ const selectHour = () => {
     </h1>
   </div>
   <div>
-    <div v-if="advisers.length === 1">
+    <div v-if="advisers.length < 1">
       <LoaderComponent class-name="my-28" />
     </div>
     <div class="mt-4" v-else>
@@ -125,7 +118,6 @@ const selectHour = () => {
         placeholder="Hora de la cita"
       />
 
-      {{ hour }}
       <div v-for="(adviser, index) in advisorsAvailable" :key="index">
         {{ adviser.name }}
       </div>
