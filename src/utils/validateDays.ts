@@ -6,7 +6,7 @@ export function validateDays(
   currentDay: number,
   currentMonth: number,
   meetings: any,
-  index: any
+  index: string
 ) {
   function pastDays() {
     return currentDay > day && Number(month) === currentMonth;
@@ -14,14 +14,14 @@ export function validateDays(
 
   function busyDay() {
     return (
-      meetings.filter((date: any) => {
+      meetings.filter((date: { month: number; day: number }) => {
         return date.month === month && date.day === day;
       }).length >= 10
     );
   }
 
   function isHolyDay() {
-    return HOLIDAYS.some((holiday: any) => {
+    return HOLIDAYS.some((holiday: { month: number; day: number }) => {
       return holiday.month === month && holiday.day === day;
     });
   }

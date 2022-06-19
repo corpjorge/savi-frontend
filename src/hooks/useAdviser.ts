@@ -7,10 +7,11 @@ export const useAdviser = async () => {
   });
 
   await administrator().then((response) => {
-    response.data.map((adviser: any) =>
-      adviser.role_id == 3 && !adviser.deleted_at && adviser.isActive
-        ? (admins.advisers = [...admins.advisers, adviser])
-        : null
+    response.data.map(
+      (adviser: { role_id: number; deleted_at: string; isActive: boolean }) =>
+        adviser.role_id == 3 && !adviser.deleted_at && adviser.isActive
+          ? (admins.advisers = [...admins.advisers, adviser])
+          : null
     );
   });
 
