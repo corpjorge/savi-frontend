@@ -27,6 +27,7 @@ const clickCreateMeeting = () => {
 
   createMeeting(meetDate, adviser.id).then(() => {
     modal.show = false;
+    window.location.reload();
   });
 };
 </script>

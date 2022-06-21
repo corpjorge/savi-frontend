@@ -14,7 +14,6 @@ export function validateDays(
   }
 
   function busyDay() {
-    console.log(adviser);
     return (
       meetings.filter((date: { month: number; day: number }) => {
         return date.month === month && date.day === day;

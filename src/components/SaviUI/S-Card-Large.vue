@@ -15,6 +15,8 @@ defineProps<{
   subtext: string;
   styling: string;
   onClick?: (event: MouseEvent) => void;
+  hour: string;
+  date: string;
 }>();
 </script>
 <template>
@@ -23,9 +25,9 @@ defineProps<{
       ' p-8 rounded-3xl shadow hover:shadow-xl cursor-pointer ' + style[styling]
     "
   >
-    <h1 class="text-5xl text-right">12:30 p.m.</h1>
+    <h1 class="text-5xl text-right">{{ hour }}</h1>
     <h2 class="mt-1 text-xl text-gray-100 text-right">
-      Jueves 30 de octubre de 2022
+      {{ date }}
     </h2>
     <h1 class="mt-5 text-lg font-medium">{{ text }}</h1>
     <p class="font-light text-sm">{{ subtext }}</p>
