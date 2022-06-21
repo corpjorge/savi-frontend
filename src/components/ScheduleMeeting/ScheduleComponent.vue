@@ -3,9 +3,20 @@ import SCard from "@/components/SaviUI/S-Card.vue";
 import VideoCamera from "@/components/icons/VideoCamera.vue";
 import SCardLarge from "@/components/SaviUI/S-Card-Large.vue";
 import ModalSchedule from "@/components/ScheduleMeeting/ModalScheduleComponent.vue";
+import { useModalCalendar } from "@/stores/modalCalendar";
+let modal = useModalCalendar();
+
+const showModalCalendar = () => {
+  modal.show = true;
+};
 </script>
 <template>
-  <SCard styling="warning" text="Nueva cita" subtext="Agende una nueva cita">
+  <SCard
+    @click="showModalCalendar"
+    styling="warning"
+    text="Nueva cita"
+    subtext="Agende una nueva cita"
+  >
     <template #icon>
       <VideoCamera :width="51" :height="54" stroke="white" fill="none" />
     </template>

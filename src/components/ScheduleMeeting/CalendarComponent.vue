@@ -78,7 +78,7 @@ const daySelect = (day: number, index: string) => {
             'border border-gray-300 rounded-full p-1 mr-3 ' +
             (currentMonth === date.month
               ? ' '
-              : 'bg-blue-600 hover:bg-blue-700 cursor-pointer ')
+              : 'bg-blue-700 hover:bg-blue-600 cursor-pointer ')
           "
           :width="25"
           :height="25"
@@ -92,7 +92,7 @@ const daySelect = (day: number, index: string) => {
             'border border-gray-300 rounded-full p-1 mr-3 ' +
             (currentMonth + 2 === date.month
               ? ''
-              : 'bg-blue-600 hover:bg-blue-700 cursor-pointer')
+              : 'bg-blue-700 hover:bg-blue-600 cursor-pointer')
           "
           :width="25"
           :height="25"

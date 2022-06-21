@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useSelectedDateStore } from "@/stores/selectedDate";
+import { useSelectedAdviser } from "@/stores/selectedAdviser";
 import { useAdviser } from "@/hooks/useAdviser";
 import { onMounted, ref } from "vue";
 import IconLeft from "@/components/icons/IconLeft.vue";
@@ -32,7 +33,7 @@ const backToCalendar = () => {
 };
 
 const advisers = ref<any>([]);
-const meetingsNotAvailable = ref<any>([]);
+const meetingsNotAvailable = ref([]);
 onMounted(async () => {
   advisers.value = await useAdviser();
 
@@ -69,7 +70,7 @@ onMounted(async () => {
   });
 });
 
-const advisorsAvailable = ref<any>([]);
+const advisorsAvailable = ref([]);
 const selectHour = () => {
   let advisersNotAvailable = [] as string[];
   advisorsAvailable.value = [];
@@ -91,12 +92,21 @@ const selectHour = () => {
       }
     }
   );
+
+  selectedDate.hour = hour.value;
+};
+
+let selectAdvisorToMeetingTrue = ref();
+const adviser = useSelectedAdviser();
+const selectAdvisorToMeeting = (id: number) => {
+  adviser.id = id;
+  selectAdvisorToMeetingTrue.value = id;
 };
 </script>
 <template>
   <div class="flex align-middle my-2">
     <IconLeft
-      class="cursor-pointer border border-gray-300 rounded-full p-1 ml-3 bg-blue-600 text-base font-medium text-white hover:bg-blue-700"
+      class="cursor-pointer border border-gray-300 rounded-full p-1 ml-3 bg-blue-700 text-base font-medium text-white hover:bg-blue-600"
       :width="25"
       :height="25"
       fill="white"
@@ -106,7 +116,7 @@ const selectHour = () => {
       {{ selectedDate.date }}
     </h1>
   </div>
-  <div>
+  <div class="h-72">
     <div v-if="advisers.length < 1">
       <LoaderComponent class-name="my-28" />
     </div>
@@ -117,9 +127,36 @@ const selectHour = () => {
         :options="hoursAvailable"
         placeholder="Hora de la cita"
       />
+      <hr class="mt-4" />
 
-      <div v-for="(adviser, index) in advisorsAvailable" :key="index">
-        {{ adviser.name }}
+      <div class="mt-4" v-if="hour && advisorsAvailable.length < 1">
+        <h1 class="text-lg capitalize">
+          No hay asesores disponibles para la hora seleccionada
+        </h1>
+      </div>
+
+      <div class="overflow-y-scroll h-56 sm:pr-5">
+        <div v-for="(adviser, index) in advisorsAvailable" :key="index">
+          <div
+            @click="selectAdvisorToMeeting(adviser.id)"
+            :class="
+              'flex items-center my-2 mx-1 p-2 cursor-pointer border rounded-2xl shadow' +
+              (selectAdvisorToMeetingTrue === adviser.id
+                ? ' bg-blue-500 text-white'
+                : ' bg-white text-gray-800')
+            "
+          >
+            <img
+              class="rounded-full w-12 h-12 mr-2"
+              :src="
+                'https://ui-avatars.com/api/?color=f4f5f7&background=ff8d72&length=2&name=' +
+                adviser.name
+              "
+              alt=""
+            />
+            <p>{{ adviser.name }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

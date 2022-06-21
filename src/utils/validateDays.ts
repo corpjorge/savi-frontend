@@ -6,17 +6,20 @@ export function validateDays(
   currentDay: number,
   currentMonth: number,
   meetings: any,
-  index: string
+  index: string,
+  adviser: number
 ) {
   function pastDays() {
     return currentDay > day && Number(month) === currentMonth;
   }
 
   function busyDay() {
+    console.log(adviser);
     return (
       meetings.filter((date: { month: number; day: number }) => {
         return date.month === month && date.day === day;
-      }).length >= 10
+      }).length >=
+      8 * adviser
     );
   }
 

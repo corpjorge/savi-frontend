@@ -8,7 +8,7 @@ defineProps<{
 </script>
 <template>
   <select
-    class="border border-gray-700 text-sm font-light rounded p-2 w-80"
+    class="border border-gray-700 bg-white | text-sm font-light rounded | p-2 w-80"
     v-model="value"
     :disabled="disabled"
   >

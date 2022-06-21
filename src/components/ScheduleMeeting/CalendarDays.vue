@@ -3,11 +3,13 @@ import { onMounted, ref } from "vue";
 import LoaderComponent from "@/components/LoaderComponent.vue";
 import { useMeetingsMonths } from "@/hooks/useMeetingsMonths";
 import { validateDays } from "@/utils/validateDays";
+import { useAdviser } from "@/hooks/useAdviser";
 
-const meetings = ref<any>();
-
+const meetings = ref();
+const advisers = ref<any>([]);
 onMounted(async () => {
   meetings.value = await useMeetingsMonths(3);
+  advisers.value = await useAdviser();
 });
 
 defineProps<{
@@ -33,13 +35,29 @@ defineProps<{
           (currentDay === day && Number(month) === currentMonth
             ? 'text-blue-500 border-blue-500 cursor-pointer'
             : 'text-gray-600') +
-          (validateDays(day, month, currentDay, currentMonth, meetings, index)
+          (validateDays(
+            day,
+            month,
+            currentDay,
+            currentMonth,
+            meetings,
+            index,
+            advisers.length
+          )
             ? ' text-gray-400 cursor-no-drop'
             : ' cursor-pointer hover:border-blue-500') +
           (day === 0 ? ' border-none mb-[2.35rem]' : '')
         "
         @click="
-          validateDays(day, month, currentDay, currentMonth, meetings, index)
+          validateDays(
+            day,
+            month,
+            currentDay,
+            currentMonth,
+            meetings,
+            index,
+            advisers.length
+          )
             ? null
             : daySelect(day, index)
         "
