@@ -28,7 +28,10 @@ const hour = ref(0);
 const hoursAvailable = ref<object[]>([]);
 
 const selectedDate = useSelectedDateStore();
+const adviserStore = useSelectedAdviser();
+
 const backToCalendar = () => {
+  adviserStore.id = null;
   selectedDate.dateSelect = false;
 };
 
@@ -70,7 +73,6 @@ onMounted(async () => {
   });
 });
 
-const adviserStore = useSelectedAdviser();
 const advisorsAvailable = ref<any>([]);
 const selectHour = () => {
   let advisersNotAvailable = [] as string[];

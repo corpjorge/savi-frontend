@@ -5,13 +5,29 @@ import TimeSelection from "@/components/ScheduleMeeting/TimeSelection.vue";
 import { useSelectedDateStore } from "@/stores/selectedDate";
 import { useModalCalendar } from "@/stores/modalCalendar";
 import { useSelectedAdviser } from "@/stores/selectedAdviser";
+import { createMeeting } from "@/api/createMeeting";
+
 const selectedDate = useSelectedDateStore();
 let modal = useModalCalendar();
 let adviser = useSelectedAdviser();
 
-const createMeeting = () => {
-  let date = selectedDate.date + " " + selectedDate.hour + ":00" + ":00";
-  console.log(date, adviser.id);
+const clickCreateMeeting = () => {
+  let date = new Date(selectedDate.date);
+  let meetDate =
+    date.getFullYear() +
+    "-" +
+    (date.getMonth() + 1 < 10 ? "0" : "") +
+    (date.getMonth() + 1) +
+    "-" +
+    date.getDate() +
+    " " +
+    selectedDate.hour +
+    ":00" +
+    ":00";
+
+  createMeeting(meetDate, adviser.id).then(() => {
+    modal.show = false;
+  });
 };
 </script>
 <template>
@@ -61,7 +77,7 @@ const createMeeting = () => {
           <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button
               :disabled="!adviser.id"
-              @click="createMeeting"
+              @click="clickCreateMeeting"
               type="button"
               class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-700 text-base font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
