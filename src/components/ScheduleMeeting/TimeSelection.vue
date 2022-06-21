@@ -70,11 +70,12 @@ onMounted(async () => {
   });
 });
 
-const advisorsAvailable = ref([]);
+const adviserStore = useSelectedAdviser();
+const advisorsAvailable = ref<any>([]);
 const selectHour = () => {
   let advisersNotAvailable = [] as string[];
   advisorsAvailable.value = [];
-
+  adviserStore.id = null;
   meetingsNotAvailable.value.map((item: { hour: number; adviser: string }) => {
     item.hour == hour.value ? advisersNotAvailable.push(item.adviser) : null;
   });
@@ -96,11 +97,8 @@ const selectHour = () => {
   selectedDate.hour = hour.value;
 };
 
-let selectAdvisorToMeetingTrue = ref();
-const adviser = useSelectedAdviser();
 const selectAdvisorToMeeting = (id: number) => {
-  adviser.id = id;
-  selectAdvisorToMeetingTrue.value = id;
+  adviserStore.id = id;
 };
 </script>
 <template>
@@ -141,7 +139,7 @@ const selectAdvisorToMeeting = (id: number) => {
             @click="selectAdvisorToMeeting(adviser.id)"
             :class="
               'flex items-center my-2 mx-1 p-2 cursor-pointer border rounded-2xl shadow' +
-              (selectAdvisorToMeetingTrue === adviser.id
+              (adviserStore.id === adviser.id
                 ? ' bg-blue-500 text-white'
                 : ' bg-white text-gray-800')
             "
