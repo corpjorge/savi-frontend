@@ -23,7 +23,7 @@ const isLoggedIn = ref(false);
       </div>
       <hr class="sm:hidden bg-blue-500 my-7 border-[1.5px]" />
       <div class="sm:border-l-[1.5px] sm:border-l-blue-500 sm:m-0">
-        <div class="sm:ml-10 lg:ml-20 sm:mr-2">
+        <div class="sm:ml-10 lg:ml-20 sm:mr-2 mt-8">
           <div class="hidden sm:flex flex-col items-center">
             <SCardLogo
               url-img="https://fedef.savinteractivo.com/storage/logo.png"
@@ -31,11 +31,12 @@ const isLoggedIn = ref(false);
               name="Fedef"
             />
           </div>
-          <div class="mb-8 sm:my-8">
+          <div class="mb-8 sm:mt-12">
             <ApplicationListComponent />
           </div>
         </div>
       </div>
     </div>
   </template>
+  <hr class="bg-blue-500 my-7 border-[1.5px]" />
 </template>

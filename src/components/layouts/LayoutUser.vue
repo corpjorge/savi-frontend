@@ -31,7 +31,7 @@ const closeSession = () => {
         class="font-medium text-brown-700 border border-brown-700 px-5 py-2 rounded-lg cursor-pointer hover:bg-brown-700 hover:text-white"
         @click="closeSession"
       >
-        Cerrar
+        Salir
       </label>
     </div>
   </div>

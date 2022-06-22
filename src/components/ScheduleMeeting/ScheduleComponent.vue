@@ -29,7 +29,6 @@ onMounted(async () => {
     }
   });
   meetingInProgress.isLoading = false;
-  console.log(meetingInProgress.meeting);
 });
 
 let modal = useModalCalendar();
@@ -38,9 +37,14 @@ const showModalCalendar = () => {
 };
 </script>
 <template>
+  <img
+    src="https://fedef.savinteractivo.com/img/header_1.png"
+    class="hidden sm:block w-full"
+    alt="header"
+  />
   <template v-if="meetingInProgress.isLoading"></template>
   <template v-else>
-    <div v-if="!meetingInProgress.meeting">
+    <div class="sm:ml-2" v-if="!meetingInProgress.meeting">
       <SCard
         @click="showModalCalendar"
         styling="warning"
@@ -52,7 +56,7 @@ const showModalCalendar = () => {
         </template>
       </SCard>
     </div>
-    <div v-else class="mt-8 sm:mr-20">
+    <div v-else class="mt-8 sm:mr-10 sm:ml-2">
       <SCardLarge
         :date="meetingInProgress.date"
         :hour="
