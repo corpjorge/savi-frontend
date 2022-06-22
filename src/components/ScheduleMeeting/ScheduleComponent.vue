@@ -35,6 +35,10 @@ let modal = useModalCalendar();
 const showModalCalendar = () => {
   modal.show = true;
 };
+
+const goMeeting = () => {
+  window.location.href = "/meeting";
+};
 </script>
 <template>
   <img
@@ -58,6 +62,7 @@ const showModalCalendar = () => {
     </div>
     <div v-else class="mt-8 sm:mr-10 sm:ml-2">
       <SCardLarge
+        @click="goMeeting"
         :date="meetingInProgress.date"
         :hour="
           (meetingInProgress.hour % 12) +

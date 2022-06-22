@@ -29,6 +29,11 @@ const router = createRouter({
       name: "Verify-Email-Link",
       component: () => VerifyValidEmailView,
     },
+    {
+      path: "/meeting",
+      name: "meeting",
+      component: () => import("../views/MeetingView.vue"),
+    },
     ...Home,
     ...HomeAdmin,
   ],

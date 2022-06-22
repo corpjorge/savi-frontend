@@ -21,6 +21,7 @@ defineProps<{
 </script>
 <template>
   <div
+    @click="onClick"
     :class="
       ' p-8 rounded-3xl shadow hover:shadow-xl cursor-pointer ' + style[styling]
     "
