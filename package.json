@@ -3,12 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host",
+    "dev-ssl": "vite --host --https",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 5050",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@voxeet/voxeet-web-sdk": "^3.6.0",
     "axios": "^0.27.2",
     "pinia": "^2.0.13",
     "vue": "^3.2.33",
