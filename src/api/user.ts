@@ -17,9 +17,10 @@ export const user = async () => {
       data.loading = false;
     })
     .catch((error) => {
-      data.unauthenticated = error.response.data.message === "Unauthenticated.";
+      data.unauthenticated =
+        error.response.data?.message === "Unauthenticated.";
       data.verifyEmail =
-        error.response.data.message === "Your email address is not verified.";
+        error.response.data?.message === "Your email address is not verified.";
     });
 
   return {

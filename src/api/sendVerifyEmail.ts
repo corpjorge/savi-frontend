@@ -15,10 +15,10 @@ export const sendVerifyEmail = async () => {
     })
     .catch((error) => {
       localStorage.setItem("emailCheck", String(true));
-      if (error.response.data.message === "Email already verified.") {
+      if (error.response.data?.message === "Email already verified.") {
         data.VerificationAlreadyDone = true;
       }
-      data.error = error.response.data.message;
+      data.error = error.response.data?.message;
     });
 
   return data;
