@@ -63,6 +63,7 @@ const nextMonth = () => {
 const daySelect = (day: number, index: string) => {
   selectedDate.dateSelect = true;
   selectedDate.date = day + " " + date.currentMonth + ", " + date.year;
+  selectedDate.dateUTF8 = date.year + "-" + date.month + "-" + day;
   selectedDate.day = day;
   selectedDate.month = date.month;
   selectedDate.dayName = index;

@@ -12,7 +12,7 @@ let modal = useModalCalendar();
 let adviser = useSelectedAdviser();
 
 const clickCreateMeeting = () => {
-  let date = new Date(selectedDate.date);
+  let date = new Date(selectedDate.dateUTF8);
   let meetDate =
     date.getFullYear() +
     "-" +
