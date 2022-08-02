@@ -14,8 +14,6 @@ import {
 
 const user = useLocalStorage("user", false);
 
-const queryParams = new URLSearchParams(window.location.search);
-
 let alias = ref("");
 let name = ref(user.name);
 let token = ref();
@@ -30,7 +28,9 @@ const leave = async () => {
 
 const main = async () => {
   token.value = await getToken();
-  VoxeetSDK.initializeToken(token.value.token, () => {});
+  VoxeetSDK.initializeToken(token.value.token, () => {
+    console.log("initialized");
+  });
   await openSession(name.value);
   handleConferenceFlow();
 };
