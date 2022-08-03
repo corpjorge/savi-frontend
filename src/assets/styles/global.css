@@ -4,3 +4,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+#self-view video {
+    border-radius: 0.5rem;
+}
+
+#remote-view video {
+    border-radius: 1.2rem;
+}
+
+@media only screen and (min-width: 768px) {
+    #remote-view video {
+        width: 500px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    #remote-view video {
+        width: 700px;
+    }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1390px) {
+    #remote-view video {
+        width: 1800px;
+        height: 500px;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    #remote-view video {
+        width: 1100px;
+    }
+}
+
+@media only screen and (min-width: 1700px) {
+    #remote-view video {
+        width: 1500px;
+    }
+}

@@ -37,9 +37,6 @@ export const handleConferenceFlow = () => {
   });
 
   VoxeetSDK.conference.on("streamUpdated", (participant, stream) => {
-    console.log(`Stream Updated for ${participant.info.name}`);
-    console.log(`  Type: ${stream.type}`);
-    console.log(`  Video Tracks: ${stream.getVideoTracks().length}`);
     if (stream.type === "Camera" && stream.getVideoTracks().length) {
       shareVideo(participant, stream);
     }
@@ -83,6 +80,7 @@ export const shareVideo = (
 
     const videoContainer: any = document.getElementById(perspective);
     videoContainer.lastElementChild.replaceWith(videoNode);
+    console.log("asdfas", videoNode);
     videoContainer.firstElementChild.innerText = participant.info.name;
   }
 

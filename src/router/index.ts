@@ -34,6 +34,11 @@ const router = createRouter({
       name: "meeting",
       component: () => import("../views/MeetingView.vue"),
     },
+    {
+      path: "/meeting/admin",
+      name: "meeting-admin",
+      component: () => import("../views/MeetingAdminView.vue"),
+    },
     ...Home,
     ...HomeAdmin,
   ],

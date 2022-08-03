@@ -2,27 +2,34 @@
 import VoxeetSDK from "@voxeet/voxeet-web-sdk";
 import { onMounted, ref } from "vue";
 import { getToken } from "@/api/token";
-import { meeting } from "@/api/meeting";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import WaitingRoom from "@/components/DolbyUI/WaitingRoom.vue";
+import ChatComponent from "@/components/ChatComponent.vue";
+import IconCam from "@/components/icons/IconCam.vue";
+import IconMicrophone from "@/components/icons/IconMicrophone.vue";
+import IconPhone from "@/components/icons/IconPhone.vue";
 import {
   openSession,
   createAndJoinConference,
   handleConferenceFlow,
-  shareVideo,
   leaveConference,
 } from "@/hooks/useDolby";
+import IconScreen from "@/components/icons/IconScreen.vue";
 
 const user = useLocalStorage("user", false);
 
+let start = ref(true);
 let alias = ref("");
 let name = ref(user.name);
 let token = ref();
 
 const join = async () => {
+  start.value = false;
   await createAndJoinConference(alias.value, name.value);
 };
 
 const leave = async () => {
+  start.value = true;
   await leaveConference();
 };
 
@@ -36,49 +43,63 @@ const main = async () => {
 };
 
 onMounted(async () => {
-  await meeting().then((res) => {
-    if (res.data.id) {
-      alias.value = res.data.meeting;
-    }
-  });
+  const queryParams = new URLSearchParams(window.location.search);
+  alias.value = queryParams.get("alias") || "";
+  console.log(alias.value);
   await main();
 });
 </script>
 <template>
-  <div class="container px-4 mt-4">
-    <div class="row justify-content-around mt-3">
-      <div class="col-4 shadow p-3 mb-5 bg-body rounded">
-        <h2>Self-View</h2>
-        <div id="self-view">
-          <p id="self-view-username"></p>
-          <i class="display-1 bi bi-person-video position-relative"></i>
-        </div>
-
-        <button
-          type="button"
-          class="btn btn-dark"
-          id="btn-join"
-          @click="join()"
-        >
-          Join
-        </button>
-        |
-        <button
-          type="button"
-          class="btn btn-dark"
-          id="btn-leave"
-          @click="leave"
-        >
-          Leave
-        </button>
+  <WaitingRoom v-if="start" :on-click="join" />
+  <template v-else>
+    <div class="h-screen">
+      <div class="ml-7 my-3">
+        <i class="savi savi-logo | text-2xl text-green-900"></i>
       </div>
-      <div class="col-4 shadow p-3 mb-5 bg-body rounded">
-        <h2>Remote-View</h2>
-        <div id="remote-view">
-          <p id="remote-view-username"></p>
-          <i class="display-1 bi bi-person-video position-relative"></i>
+      <div class="mx-7 flex justify-between">
+        <div>
+          <div class="fixed m-8">
+            <div id="self-view" class="w-40">
+              <i class="display-1"></i>
+            </div>
+          </div>
+          <div id="remote-view">
+            <i class="display-1"></i>
+          </div>
+          <div class="flex justify-center -mt-12 z-50">
+            <div
+              class="bg-gray-100 bg-opacity-75 cursor-pointer z-50 rounded mr-2 p-2"
+            >
+              <IconCam />
+            </div>
+            <div
+              class="bg-gray-100 bg-opacity-75 cursor-pointer z-50 rounded mr-2 p-2"
+            >
+              <IconMicrophone />
+            </div>
+            <div
+              class="bg-gray-100 bg-opacity-75 cursor-pointer z-50 rounded mr-2 p-2"
+            >
+              <IconScreen />
+            </div>
+            <div
+              class="bg-red-200 bg-opacity-75 cursor-pointer z-50 rounded mr-2 p-2"
+              id="btn-leave"
+              @click="leave"
+            >
+              <IconPhone />
+            </div>
+          </div>
+        </div>
+        <div class="w-1/4">
+          <div
+            class="mx-5 lg:mr-10 mb-3 p-3 rounded-lg bg-green-600 text-gray-100"
+          >
+            Cliente: Jorge Eduardo
+          </div>
+          <ChatComponent />
         </div>
       </div>
     </div>
-  </div>
+  </template>
 </template>

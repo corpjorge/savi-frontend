@@ -1,0 +1,32 @@
+<script setup lang="ts">
+defineProps<{
+  className?: string;
+  width?: number;
+  height?: number;
+  fill?: string;
+  stroke?: string;
+  id?: string;
+}>();
+</script>
+<template>
+  <svg
+    width="24px"
+    height="24px"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      opacity="0.15"
+      d="M9 6C9 4.34315 10.3431 3 12 3C13.6569 3 15 4.34315 15 6V12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12V6Z"
+      fill="#001A72"
+    />
+    <path
+      d="M18 12C18 15.3137 15.3137 18 12 18M12 18C8.68629 18 6 15.3137 6 12M12 18V21M12 21H15M12 21H9M12 15C10.3431 15 9 13.6569 9 12V6C9 4.34315 10.3431 3 12 3C13.6569 3 15 4.34315 15 6V12C15 13.6569 13.6569 15 12 15Z"
+      stroke="#001A72"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</template>

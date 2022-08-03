@@ -49,16 +49,11 @@ const showModalCalendar = () => {
   modal.show = true;
 };
 
-const goMeeting = () => {
-  window.location.href = "/meeting";
+const goMeeting = (meetingId: string) => {
+  window.location.href = `/meeting/admin/?alias=${meetingId}`;
 };
 </script>
 <template>
-  <img
-    src="https://fedef.savinteractivo.com/img/header_1.png"
-    class="hidden sm:block w-full"
-    alt="header"
-  />
   <template v-if="meetingInProgress.isLoading"></template>
   <template v-else>
     <div class="sm:ml-2">
@@ -73,14 +68,14 @@ const goMeeting = () => {
         </template>
       </SCard>
     </div>
-    <div class="mt-8 sm:mr-10 sm:ml-2">
+    <div class="mt-8 sm:mr-10 sm:ml-2 overflow-y-scroll h-[30rem] sm:pr-5">
       <div
         class="mb-2"
         v-for="meeting in meetingInProgress.meeting"
         :key="meeting.id"
       >
         <SCardLarge
-          @click="goMeeting"
+          @click="goMeeting(meeting.meeting)"
           :date="convertDate(meeting.date)"
           :hour="
             (convertHour(meeting.date) % 12) +
