@@ -42,5 +42,6 @@
 @media only screen and (min-width: 1700px) {
     #remote-view video {
         width: 1500px;
+        height: 800px;
     }
 }
