@@ -7,6 +7,8 @@ export function VerifyValidEmailView() {
 
   urlBack = decodeURIComponent(urlBack);
 
+  console.log(urlBack);
+
   http.get(urlBack).then(() => {
     window.location.href = "/";
   });
