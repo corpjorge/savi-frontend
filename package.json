@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite --host",
     "dev-ssl": "vite --host --https",
-    "build": "vue-tsc --noEmit && vite build",
+    "build-vadilate": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "preview": "vite preview --port 5050",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
