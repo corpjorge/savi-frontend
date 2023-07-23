@@ -7,10 +7,9 @@ export function VerifyValidEmailView() {
 
   urlBack = decodeURIComponent(urlBack);
 
-  const verifyIndex = urlBack.indexOf("email/verify/");
-  const data = urlBack.substring(verifyIndex + "email/verify/".length);
+  console.log(urlBack);
 
-  http.get(`email/verify/${data}`).then(() => {
+  http.get(urlBack).then(() => {
     window.location.href = "/";
   });
 }
