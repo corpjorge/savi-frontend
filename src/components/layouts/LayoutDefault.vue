@@ -1,3 +1,4 @@
+<script setup lang="ts"></script>
 <template>
   <div class="justify-center">
     <div class="text-center mt-10 lg:mt-32">
@@ -6,11 +7,3 @@
     <slot></slot>
   </div>
 </template>
-
-<script>
-export default {
-  name: "LayoutDefault",
-};
-</script>
-
-<style scoped></style>
