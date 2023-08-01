@@ -60,15 +60,13 @@ onMounted(async () => {
 
   hours.map((hours: { value: string; label: string }) => {
     if (!numberOfAdvisers(hours, hoursNotAvailable, advisers.value)) {
-      if (validateHoursAvailable(hours, selectedDate)) {
-        if (selectedDate.dayName == "SA" && Number(hours.value) >= 12) {
-          return;
-        }
-        hoursAvailable.value.push({
-          value: hours.value,
-          label: hours.label,
-        });
+      if (selectedDate.dayName == "SA" && Number(hours.value) >= 12) {
+        return;
       }
+      hoursAvailable.value.push({
+        value: hours.value,
+        label: hours.label,
+      });
     }
   });
 });
